@@ -10,12 +10,12 @@ const sanitizeDelimiters = (delimiters: string): string => {
     .replace(/\[|\]/g, "");
 };
 
-const getAllNegativeNumbers = (numbers: Array<number>) => {
+const getAllNegativeNumbers = (numbers: Array<number>): Array<number> => {
   return numbers.filter((num) => num < 0);
 };
 
 export const add = (numbersString: string): number => {
-  let delimiterRegEx = /[,\n]/;
+  let delimiterRegEx: RegExp = /[,\n]/;
   if (numbersString.startsWith('//')) {
     const delimiter = sanitizeDelimiters(getDelimiters(numbersString));
     delimiterRegEx = new RegExp(delimiter);
