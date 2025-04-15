@@ -1,4 +1,4 @@
-import { add } from "../src/string-calculator"
+import { add, exportedForTesting } from "../src/string-calculator"
 
 describe('Add numbers', () => {
     it('should return 0 for empty string', () => {
@@ -21,4 +21,10 @@ describe('Add numbers', () => {
         expect(add('12\n20,10')).toBe(42);
         expect(add('2,8,3\n7,4,6\n5,5')).toBe(40);
     });
+})
+
+describe('getDelimiter', () => {
+    it('should return empty string for empty string input', () => {
+        expect(exportedForTesting.getDelimiter('')).toBe('')
+    })
 })
