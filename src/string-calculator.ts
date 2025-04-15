@@ -19,13 +19,21 @@ export const add = (numbersString: string): number => {
     numbersString = numbersString.split('\n')[1];
   }
 
-  return numbersString
+  const numbers: Array<number> = numbersString
     .split(delimiterRegEx)
-    .reduce((acc, num) => acc + Number(num), 0);
+    .map((num) => Number(num));
+
+  const negativeNumbers = getAllNegativeNumbers(numbers);
+
+  if (negativeNumbers.length) {
+    throw Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
+  }
+
+  return numbers.reduce((acc, num) => acc + Number(num), 0);
 };
 
 export const exportedForTesting = {
   getDelimiter,
   sanitizeDelimiters,
-  getAllNegativeNumbers
+  getAllNegativeNumbers,
 };

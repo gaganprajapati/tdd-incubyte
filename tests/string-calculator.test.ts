@@ -32,7 +32,10 @@ describe('Add numbers', () => {
     expect(add('//*\n2*8*3*7*4*8')).toBe(32);
   });
 
-  it.todo('should throw an error with all negative numbers in the string included in the error message');
+  it('should throw an error with all negative numbers in the string included in the error message', () => {
+    expect(() => add('-2,1,5,-8')).toThrow('negative numbers not allowed -2,-8');
+    expect(() => add('-2,-4,-9')).toThrow('negative numbers not allowed -2,-4,-9');
+  });
 });
 
 describe('getDelimiter', () => {
