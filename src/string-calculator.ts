@@ -3,10 +3,15 @@ const getDelimiter = (numbersString: string): string => {
   return match?.length ? match[1] : '';
 };
 
+const sanitizeDelimiters = (delimiters: string): string => {
+  return delimiters.replace(/[.*+?^${}()|\\]/g, '\\$&');
+};
+
 export const add = (numbersString: string): number => {
   let delimiterRegEx = /[,\n]/;
   if (numbersString.startsWith('//')) {
-    delimiterRegEx = new RegExp(getDelimiter(numbersString));
+    const delimiter = getDelimiter(numbersString);
+    delimiterRegEx = new RegExp(delimiter);
     numbersString = numbersString.split('\n')[1];
   }
   return numbersString
@@ -16,4 +21,5 @@ export const add = (numbersString: string): number => {
 
 export const exportedForTesting = {
   getDelimiter,
+  sanitizeDelimiters,
 };

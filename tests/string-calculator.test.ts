@@ -25,7 +25,9 @@ describe('Add numbers', () => {
   it('should identify the delimiter and return the sum of numbers separated by that delimiter', () => {
     expect(add('//;\n2;5')).toBe(7);
     expect(add('//:\n12:20:10')).toBe(42);
-});
+  });
+
+  it.todo('should be able to handle special character delimiters');
 });
 
 describe('getDelimiter', () => {
@@ -37,5 +39,15 @@ describe('getDelimiter', () => {
     expect(exportedForTesting.getDelimiter('//;\n1;2')).toBe(';');
     expect(exportedForTesting.getDelimiter('//*:\n1*:2')).toBe('*:');
   });
-  
+});
+
+describe('sanitizeDelimiters', () => {
+  it('should return empty string for empty string input', () => {
+    expect(exportedForTesting.sanitizeDelimiters('')).toBe('');
+  });
+
+  it('should return special characters with "\\" as prefix', () => {
+    expect(exportedForTesting.sanitizeDelimiters('**')).toBe('\\*\\*');
+    expect(exportedForTesting.sanitizeDelimiters('$$')).toBe('\\$\\$');
+  });
 });
