@@ -41,6 +41,11 @@ describe('Add numbers', () => {
     expect(add('2,5,1001')).toBe(7);
     expect(add('12,20,2022')).toBe(32);
   });
+
+  it('should handle delimiters of any length and return the sum of numbers separated by that delimiter', () => {
+    expect(add('//;;\n2;;5')).toBe(7);
+    expect(add('//***\n12***20***10')).toBe(42);
+  });
 });
 
 describe('getDelimiter', () => {
