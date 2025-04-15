@@ -7,6 +7,10 @@ const sanitizeDelimiters = (delimiters: string): string => {
   return delimiters.replace(/[.*+?^${}()|\\]/g, '\\$&');
 };
 
+const getAllNegativeNumbers = (numbers: Array<number>) => {
+  return numbers.filter((num) => num < 0);
+};
+
 export const add = (numbersString: string): number => {
   let delimiterRegEx = /[,\n]/;
   if (numbersString.startsWith('//')) {
@@ -14,6 +18,7 @@ export const add = (numbersString: string): number => {
     delimiterRegEx = new RegExp(delimiter);
     numbersString = numbersString.split('\n')[1];
   }
+
   return numbersString
     .split(delimiterRegEx)
     .reduce((acc, num) => acc + Number(num), 0);
@@ -22,4 +27,5 @@ export const add = (numbersString: string): number => {
 export const exportedForTesting = {
   getDelimiter,
   sanitizeDelimiters,
+  getAllNegativeNumbers
 };

@@ -31,6 +31,8 @@ describe('Add numbers', () => {
     expect(add('//$\n2$8$3$7$4$6$5$5')).toBe(40);
     expect(add('//*\n2*8*3*7*4*8')).toBe(32);
   });
+
+  it.todo('should throw an error with all negative numbers in the string included in the error message');
 });
 
 describe('getDelimiter', () => {
@@ -52,5 +54,28 @@ describe('sanitizeDelimiters', () => {
   it('should return special characters with "\\" as prefix', () => {
     expect(exportedForTesting.sanitizeDelimiters('**')).toBe('\\*\\*');
     expect(exportedForTesting.sanitizeDelimiters('$$')).toBe('\\$\\$');
+  });
+});
+
+describe('getAllNegativeNumbers', () => {
+  it('should return empty array for empty array', () => {
+    expect(exportedForTesting.getAllNegativeNumbers([])).toEqual([]);
+  });
+
+  it('should return empty array for non-negative numbers in an array', () => {
+    expect(exportedForTesting.getAllNegativeNumbers([1, 2])).toEqual([]);
+    expect(exportedForTesting.getAllNegativeNumbers([22, 28, 19])).toEqual([]);
+  });
+
+  it('should return array of all negative numbers present in an array of numbers', () => {
+    expect(exportedForTesting.getAllNegativeNumbers([1, 2, -4, 5])).toEqual([
+      -4,
+    ]);
+    expect(exportedForTesting.getAllNegativeNumbers([-1, -2, -4])).toEqual([
+      -1, -2, -4,
+    ]);
+    expect(
+      exportedForTesting.getAllNegativeNumbers([-1, 3, -2, 5, -4, 8])
+    ).toEqual([-1, -2, -4]);
   });
 });
