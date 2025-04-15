@@ -7,6 +7,7 @@ export const add = (numbersString: string): number => {
   let delimiterRegEx = /[,\n]/;
   if (numbersString.startsWith('//')) {
     delimiterRegEx = new RegExp(getDelimiter(numbersString));
+    numbersString = numbersString.split('\n')[1];
   }
   return numbersString
     .split(delimiterRegEx)
