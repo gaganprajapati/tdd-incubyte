@@ -33,10 +33,14 @@ describe('Add numbers', () => {
   });
 
   it('should throw an error with all negative numbers in the string included in the error message', () => {
-    expect(() => add('-2,1,5,-8')).toThrow('negative numbers not allowed -2,-8');
-    expect(() => add('-2,-4,-9')).toThrow('negative numbers not allowed -2,-4,-9');
+    expect(() => add('-2,1,5,-8')).toThrow(
+      'negative numbers not allowed -2,-8'
+    );
+    expect(() => add('-2,-4,-9')).toThrow(
+      'negative numbers not allowed -2,-4,-9'
+    );
   });
-  
+
   it('should not add the numbers greater than 1000', () => {
     expect(add('2,5,1001')).toBe(7);
     expect(add('12,20,2022')).toBe(32);
@@ -50,7 +54,12 @@ describe('Add numbers', () => {
   it('should support multi delimiters', () => {
     expect(add('//[*][%]\n1*2%3')).toBe(6);
     expect(add('//[*][%][$]\n1*2%3$12')).toBe(18);
-});
+  });
+
+  it('should support multi delimiters with length longer than one char', () => {
+    expect(add('//[**][%%%]\n1**2%%%3')).toBe(6);
+    expect(add('//[***][%][$$]\n1***2%3$$12')).toBe(18);
+  });
 });
 
 describe('getDelimiters', () => {
