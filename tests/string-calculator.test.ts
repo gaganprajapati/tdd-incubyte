@@ -46,16 +46,21 @@ describe('Add numbers', () => {
     expect(add('//;;\n2;;5')).toBe(7);
     expect(add('//***\n12***20***10')).toBe(42);
   });
+
+  it('should support multi delimiters', () => {
+    expect(add('//[*][%]\n1*2%3')).toBe(6);
+    expect(add('//[*][%][$]\n1*2%3$12')).toBe(18);
+});
 });
 
-describe('getDelimiter', () => {
+describe('getDelimiters', () => {
   it('should return empty string for empty string input', () => {
-    expect(exportedForTesting.getDelimiter('')).toBe('');
+    expect(exportedForTesting.getDelimiters('')).toBe('');
   });
 
   it('should return the character that is enclosed within "//" and "\n"', () => {
-    expect(exportedForTesting.getDelimiter('//;\n1;2')).toBe(';');
-    expect(exportedForTesting.getDelimiter('//*:\n1*:2')).toBe('*:');
+    expect(exportedForTesting.getDelimiters('//;\n1;2')).toBe(';');
+    expect(exportedForTesting.getDelimiters('//*:\n1*:2')).toBe('*:');
   });
 });
 

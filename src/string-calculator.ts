@@ -1,10 +1,13 @@
-const getDelimiter = (numbersString: string): string => {
+const getDelimiters = (numbersString: string): string => {
   const match = numbersString.match(/\/\/(.*?)\n/);
   return match?.length ? match[1] : '';
 };
 
 const sanitizeDelimiters = (delimiters: string): string => {
-  return delimiters.replace(/[.*+?^${}()|\\]/g, '\\$&');
+  return delimiters
+    .replace(/[.*+?^${}()|\\]/g, '\\$&')
+    .replaceAll('][', '|')
+    .replace(/\[|\]/g, "");
 };
 
 const getAllNegativeNumbers = (numbers: Array<number>) => {
@@ -14,7 +17,7 @@ const getAllNegativeNumbers = (numbers: Array<number>) => {
 export const add = (numbersString: string): number => {
   let delimiterRegEx = /[,\n]/;
   if (numbersString.startsWith('//')) {
-    const delimiter = sanitizeDelimiters(getDelimiter(numbersString));
+    const delimiter = sanitizeDelimiters(getDelimiters(numbersString));
     delimiterRegEx = new RegExp(delimiter);
     numbersString = numbersString.split('\n')[1];
   }
@@ -36,7 +39,7 @@ export const add = (numbersString: string): number => {
 };
 
 export const exportedForTesting = {
-  getDelimiter,
+  getDelimiters,
   sanitizeDelimiters,
   getAllNegativeNumbers,
 };
