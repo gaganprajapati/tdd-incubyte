@@ -10,7 +10,7 @@ const sanitizeDelimiters = (delimiters: string): string => {
 export const add = (numbersString: string): number => {
   let delimiterRegEx = /[,\n]/;
   if (numbersString.startsWith('//')) {
-    const delimiter = getDelimiter(numbersString);
+    const delimiter = sanitizeDelimiters(getDelimiter(numbersString));
     delimiterRegEx = new RegExp(delimiter);
     numbersString = numbersString.split('\n')[1];
   }

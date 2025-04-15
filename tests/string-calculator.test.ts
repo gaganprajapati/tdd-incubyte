@@ -27,7 +27,10 @@ describe('Add numbers', () => {
     expect(add('//:\n12:20:10')).toBe(42);
   });
 
-  it.todo('should be able to handle special character delimiters');
+  it('should be able to handle special character delimiters', () => {
+    expect(add('//$\n2$8$3$7$4$6$5$5')).toBe(40);
+    expect(add('//*\n2*8*3*7*4*8')).toBe(32);
+  });
 });
 
 describe('getDelimiter', () => {
