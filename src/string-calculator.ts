@@ -29,7 +29,10 @@ export const add = (numbersString: string): number => {
     throw Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
   }
 
-  return numbers.reduce((acc, num) => acc + Number(num), 0);
+  return numbers.reduce((acc, num) => {
+    if (num <= 1000) return acc + num;
+    return acc;
+  }, 0);
 };
 
 export const exportedForTesting = {
